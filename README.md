@@ -8,7 +8,6 @@ This project is a generative art installation centered around the themes of "tra
 To recreate this project, you need a LilyGo TTGO T-display ESP32 and a USB-C to USB-C cable to connect the ESP32 to your computer. 
 
 ### Setup
-## Setup
 1. Download and install the [Arduino IDE](https://www.arduino.cc/en/software).
 2. Follow the [Arduino-ESP32 installation guide](https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html) to add ESP32 board support.
 3. Install **TFT_eSPI by Bodmer** through the Arduino Library Manager.
