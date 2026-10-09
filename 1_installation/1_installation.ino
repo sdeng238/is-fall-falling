@@ -1,17 +1,17 @@
 #include <TFT_eSPI.h>
 
 TFT_eSPI tft = TFT_eSPI();
-constexpr int COLS = 5;
+constexpr int COLS = 5; // number of columns
 
-int y[COLS];
-int elts[COLS];
-int speeds[COLS];
+int y[COLS]; // y-coordinate of element in each column
+int elts[COLS]; // element in each column
+int speeds[COLS]; // speed of element in each column
 
 void setup() {
-  // put your setup code here, to run once:
   tft.init();
   tft.setRotation(1);  // landscape
 
+  // initialize elements in each column
   for (int i = 0; i < COLS; i++) {
     y[i] = 0;
     elts[i] = random(3);
@@ -20,7 +20,7 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  // addvance a timestep and draw element in each column
   for (int i = 0; i < COLS; i++) {
     if (y[i] > tft.height()) { 
       y[i] = 0; // reset element fall from the top
@@ -31,16 +31,13 @@ void loop() {
     y[i] += speeds[i]; // fall
   }
 
-  draw(); // draw three elements
+  draw();
 }
 
 void draw() {
   // clear elements
   tft.fillScreen(TFT_DARKCYAN);
 
-  // 3 elements: each randomize color
-  // decrement y (falling down), randomize x + rotation (wind)
-  // draw leaf in each column
   for (int i = 0; i < COLS; i++) {
     // randomize x within column (wind!)
     int x = random(tft.width() * i / COLS, tft.width() * (i + 1) / COLS);
@@ -93,8 +90,6 @@ void drawLeaf(int centerX, int centerY, int scale) {
   uint16_t leafColor = leafColors[random(3)];
   
   // x, y (center), radius x, radius y for elliptical leaf body
-  // int centerX = 120;
-  // int centerY = 80;
   int radX = 50 / scale;
   int radY = 20 / scale;
   tft.drawEllipse(centerX, centerY, 
